@@ -1,42 +1,66 @@
 # Project Plan
 
-> One of the two planning docs you provide. Use as much detail as the project
-> needs, including rationale, constraints, examples, edge cases, and explicit
-> exclusions that should guide later feature work. Draft it directly, develop it
-> through any AI conversation, or optionally run `/discovery` for a guided deep
-> planning session. The content is always yours to direct. When it is filled in,
-> run `/overview` to generate the project overview from this plus `build-plan.md`.
+## 1. Problem
+Create a personal portfolio website to showcase projects and skills, optimized for recruiters/hiring managers to quickly assess capabilities and get in touch. Includes a private admin area to manage project content without redeploying.
 
-## 1. Problem - What problem are we solving?
+## 2. Users
+- **Primary (public)**: Recruiters and hiring managers — need fast scanning, clear proof of skills, easy path to contact.
+- **Secondary (private)**: Site owner (you) — via a hidden admin login to create/edit projects.
 
-Add the problem that this project solves and its main purpose
+## 3. Features (MVP)
+- **Single-page scroll site** — Home / About / Contact as sections on one page, anchor-linked nav
+- **Projects section** — card grid embedded in the scroll flow; each card links out to a dedicated project detail page (`/projects/[slug]`)
+  - Grid must scale gracefully from 1 project up to 20+ (no hardcoded layout assumptions; consider pagination or "load more" if it grows large)
+- **Resume/CV** — downloadable PDF link
+- **Contact** — contact form section (part of the single-page scroll)
+- **Admin page (secret route)**
+  - Login: password-based, bcrypt-hashed, compared server-side
+  - Create/edit projects (plain text fields)
+  - Not publicly linked; accessed via a direct URL known only to you
 
-## 2. Users - Who is this for?
+## 4. Data
+**Storage**: Upstash Redis (via Vercel Marketplace) — project records stored as JSON under key `project:{id}`, plus an index list of project IDs for ordering. No fixed schema required (fields can be added later without migrating old records).
 
-What kind of users are you focusing on? eg. new programmers, college students, single people
+**Project record fields:**
 
-## 3. Features - What does the MVP need?
+| Field | Type | Notes |
+|---|---|---|
+| `id` / `slug` | string | Unique identifier, used in URL (`/projects/my-project`) |
+| `title` | string | Project name |
+| `summary` | string | One-liner for the card grid |
+| `description` | string | Fuller write-up for detail page (drafted via Claude Haiku) |
+| `techStack` | array | e.g. `["Next.js", "Postgres", "Tailwind"]` |
+| `role` | string | Your role on the project |
+| `year` / `dateCompleted` | string/date | For sorting/context |
+| `thumbnailUrl` | string | Card grid image |
+| `images` | array | *(optional, post-MVP)* additional screenshots |
+| `liveUrl` | string | Link to live demo/site, if any |
+| `repoUrl` | string | Link to GitHub repo, if public |
+| `featured` | boolean | Pin standout projects to top of grid |
+| `order` | number | *(optional, post-MVP)* manual sort control |
+| `status` | string | *(optional, post-MVP)* `"published"` \| `"draft"` |
+| `createdAt` / `updatedAt` | timestamp | Auto-managed, not admin-edited |
 
-High level list of features. One line each, don't go into deep detail
+**MVP scope**: `id/slug`, `title`, `summary`, `description`, `techStack`, `role`, `year`, `thumbnailUrl`, `liveUrl`, `repoUrl`, `featured`, `createdAt`/`updatedAt`. `images`, `order`, and `status` can be added later without a migration.
 
-## 4. Data - What are we storing?
+## 5. Tech
+- **Framework**: Next.js
+- **UI**: ShadCN UI
+- **Storage**: Upstash Redis (free tier)
+- **Auth (admin)**: bcrypt password hash, compared server-side on login via a server action/API route; session via signed cookie
+- **Content generation**: Claude Haiku — drafts project descriptions and page copy
+- **Contact form backend**: Nodemailer + Gmail SMTP via a Next.js API route
+  - Google App Password (2FA-enabled Gmail account) stored as env var
+  - Basic spam protection (honeypot field / simple rate-limiting)
 
-List of data that will be stored eg. users, products, stats
+## 6. Monetize
+Not monetizing. Vercel Hobby tier (free) is non-commercial only — consistent with this.
 
-## 5. Tech - What stack are we using?
+## 7. UI/UX
+- **Tone**: Dark, moody, high-contrast — minimalist but distinctive
+- **Motion**: Subtle fade/slide-in animations on scroll — restrained, not flashy
+- **Navigation**: Single-page scroll (Home/About/Contact) with anchor links; Projects section links out to standalone detail pages
+- **Admin UI**: Functional/plain — no need to match public site polish
 
-The stack this project will use eg. Next.js, Neon Postgres, ShadCN UI, Claude Haiku for content generation
-
-## 6. Monetize - How will this make money?
-
-Explain how you plan to make money. eg. Ads, memberships, etc
-
-## 7. UI/UX - How should this look and feel?
-
-Describe the look and feel. Add examples if you want
-
-## 8. Deployment - Where and how will this ship?
-
-Target host if known, such as Render or Vercel. Include app type, build command,
-start command or output directory, env vars by name, database or storage needs,
-workers or cron jobs, health check path, and domain notes if you know them.
+## 8. Deployment
+GitHub → Vercel auto-deploy on push to main branch. Estimated cost: $0/month (Hobby + Upstash free tier), aside from minor one-time Claude Haiku API usage during content drafting.
