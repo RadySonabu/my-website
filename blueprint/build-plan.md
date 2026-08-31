@@ -69,7 +69,7 @@ filling both planning docs; it will flag plan-shape problems and can propose a
 cleaned-up checkbox version before generating the project overview.
 
 - [x] 1. **Site shell** - single-page scroll layout with Home/About/Contact sections and anchor nav
-- [ ] 2. **Projects grid & detail pages** - card grid on the scroll page + `/projects/[slug]` detail pages, using placeholder project data
+- [x] 2. **Projects grid & detail pages** - card grid on the scroll page + `/projects/[slug]` detail pages, using placeholder project data
 - [ ] 3. **Resume download** - downloadable PDF link
 - [ ] 4. **Contact form** - form UI + Nodemailer/Gmail SMTP backend with honeypot/rate-limiting
 - [ ] 5. **Project data wiring** - Upstash Redis storage, replace placeholder data with real reads for the grid and detail pages
