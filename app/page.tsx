@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ContactForm from "./components/ContactForm";
 import ResumeDownloadLink from "./components/ResumeDownloadLink";
 import ScrollReveal from "./components/ScrollReveal";
 import { getAllProjects } from "./lib/projects";
@@ -145,9 +146,7 @@ export default function Home() {
             <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
               Contact
             </h2>
-            <p className="mt-4 max-w-md text-lg text-muted">
-              Contact form coming soon.
-            </p>
+            <ContactForm />
           </ScrollReveal>
         </section>
       </main>
