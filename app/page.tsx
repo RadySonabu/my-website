@@ -31,13 +31,43 @@ export default function Home() {
       <main>
         <section
           id="home"
-          className="flex min-h-screen flex-col items-center justify-center px-6 text-center"
+          className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center"
         >
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">
-            Your Name
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 200 400"
+            preserveAspectRatio="none"
+            className="pointer-events-none absolute right-0 top-0 h-full w-40 opacity-40 sm:w-56"
+          >
+            <line
+              x1="170"
+              y1="0"
+              x2="40"
+              y2="400"
+              stroke="var(--hero-cream)"
+              strokeWidth="1"
+            />
+            <line
+              x1="130"
+              y1="0"
+              x2="0"
+              y2="260"
+              stroke="var(--hero-gradient-start)"
+              strokeWidth="1"
+            />
+          </svg>
+
+          <p className="text-sm font-medium uppercase tracking-widest text-muted">
+            Ardy Ubanos
+          </p>
+          <h1
+            className="mt-3 text-5xl font-bold tracking-tight sm:text-7xl"
+            style={{ color: "var(--hero-cream)" }}
+          >
+            AI Deve<span className="hero-gradient-letter">l</span>oper
           </h1>
           <p className="mt-4 max-w-md text-lg text-muted">
-            A short line about what you build and who it&apos;s for.
+            Building intelligent products from idea to deploy.
           </p>
         </section>
 

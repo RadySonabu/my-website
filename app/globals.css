@@ -5,6 +5,10 @@
   --foreground: #ededed;
   --muted: #8a8a8a;
   --accent: #ededed;
+
+  --hero-cream: #f0d9a0;
+  --hero-gradient-start: #e0446b;
+  --hero-gradient-end: #f0d9a0;
 }
 
 @theme inline {
@@ -43,6 +47,17 @@ html {
     transform: none;
     transition: none;
   }
+}
+
+.hero-gradient-letter {
+  background: linear-gradient(
+    to bottom,
+    var(--hero-gradient-start),
+    var(--hero-gradient-end)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 body {
