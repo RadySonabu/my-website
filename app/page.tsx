@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ResumeDownloadLink from "./components/ResumeDownloadLink";
 import ScrollReveal from "./components/ScrollReveal";
 import { getAllProjects } from "./lib/projects";
 
@@ -69,6 +70,7 @@ export default function Home() {
           <p className="mt-4 max-w-md text-lg text-muted">
             Building intelligent products from idea to deploy.
           </p>
+          <ResumeDownloadLink />
         </section>
 
         {projects.length > 0 && (
