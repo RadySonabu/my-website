@@ -127,7 +127,12 @@ export default function Home() {
               About
             </h2>
             <p className="mt-4 max-w-xl text-lg text-muted">
-              Placeholder bio: background, focus areas, and what drives the work.
+              I&apos;m a Senior Software Engineer based in Metro Manila,
+              Philippines, focused on Python backend systems and applying
+              LLMs and AI to real products. Alongside engineering work, I
+              teach as a part-time Faculty Lecturer covering Software
+              Analysis and Design, and I&apos;m completing an MS in Computer
+              Science with research in AI-driven recommender systems.
             </p>
           </ScrollReveal>
         </section>

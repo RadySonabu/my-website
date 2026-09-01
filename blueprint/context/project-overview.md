@@ -1,6 +1,6 @@
 # my-website - Project Overview
 
-<!-- blueprint:source-hash 5256c1b5d800e3c6cda159d91e6ad806c34da9af1a109cad5336bd412de6ac00 -->
+<!-- blueprint:source-hash 9c148766ad9979236f8ec2f6426b61b15d56d58b9d71eb6fd29b563391e95dce -->
 
 > A personal portfolio website for showcasing projects and skills to recruiters,
 > with a private admin area for managing project content without redeploying.
@@ -28,6 +28,11 @@ redeploy for every edit; a private admin area removes that friction.
    each card links to a dedicated `/projects/[slug]` detail page. Uses
    placeholder data until feature 5 wires up storage.
 3. **Resume download** - downloadable PDF link.
+8. **SEO & real bio content** - real About-section bio drawn from the site
+   owner's resume, plus metadata, Open Graph tags, JSON-LD Person structured
+   data, `sitemap.xml`, and `robots.txt`, so search results surface for name
+   and role searches (e.g. "Ardy Ubanos", "MSCS Professor", "AI Developer",
+   "Python Developer" + Philippines).
 4. **Contact form** - form UI plus a Nodemailer/Gmail SMTP backend, with
    honeypot and basic rate-limiting spam protection.
 5. **Project data wiring** - Upstash Redis storage; replaces placeholder data
@@ -95,6 +100,8 @@ consistent with this project having no revenue plan.
   the Projects section links out to standalone detail pages
 - **Admin UI** - functional/plain; does not need to match the public site's
   polish
+- **About section** - real bio content (not placeholder), written to
+  naturally surface role/skill keywords for search
 
 Routes:
 

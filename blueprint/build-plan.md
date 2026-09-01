@@ -71,6 +71,7 @@ cleaned-up checkbox version before generating the project overview.
 - [x] 1. **Site shell** - single-page scroll layout with Home/About/Contact sections and anchor nav
 - [x] 2. **Projects grid & detail pages** - card grid on the scroll page + `/projects/[slug]` detail pages, using placeholder project data
 - [x] 3. **Resume download** - downloadable PDF link
+- [x] 8. **SEO & real bio content** - real About-section bio (from resume), meta tags, Open Graph, JSON-LD Person structured data, sitemap.xml, robots.txt
 - [ ] 4. **Contact form** - form UI + Nodemailer/Gmail SMTP backend with honeypot/rate-limiting
 - [ ] 5. **Project data wiring** - Upstash Redis storage, replace placeholder data with real reads for the grid and detail pages
 - [ ] 6. **Admin login** - secret route, bcrypt password check, signed-cookie session

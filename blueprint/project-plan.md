@@ -12,6 +12,7 @@ Create a personal portfolio website to showcase projects and skills, optimized f
 - **Projects section** — card grid embedded in the scroll flow; each card links out to a dedicated project detail page (`/projects/[slug]`)
   - Grid must scale gracefully from 1 project up to 20+ (no hardcoded layout assumptions; consider pagination or "load more" if it grows large)
 - **Resume/CV** — downloadable PDF link
+- **SEO & discoverability** — metadata, structured data, and real profile content so search results surface for name and role searches (e.g. "Ardy Ubanos", "MSCS Professor", "AI Developer", "Python Developer" + Philippines)
 - **Contact** — contact form section (part of the single-page scroll)
 - **Admin page (secret route)**
   - Login: password-based, bcrypt-hashed, compared server-side
@@ -61,6 +62,7 @@ Not monetizing. Vercel Hobby tier (free) is non-commercial only — consistent w
 - **Motion**: Subtle fade/slide-in animations on scroll — restrained, not flashy
 - **Navigation**: Single-page scroll (Home/About/Contact) with anchor links; Projects section links out to standalone detail pages
 - **Admin UI**: Functional/plain — no need to match public site polish
+- **About section**: uses real bio content (not placeholder), written to naturally surface role/skill keywords for search
 
 ## 8. Deployment
 GitHub → Vercel auto-deploy on push to main branch. Estimated cost: $0/month (Hobby + Upstash free tier), aside from minor one-time Claude Haiku API usage during content drafting.
