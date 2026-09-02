@@ -10,8 +10,8 @@ const NAV_LINKS = [
   { href: "#contact", label: "Contact" },
 ] as const;
 
-export default function Home() {
-  const projects = getAllProjects();
+export default async function Home() {
+  const projects = await getAllProjects();
 
   return (
     <>

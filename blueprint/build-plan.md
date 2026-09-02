@@ -73,6 +73,6 @@ cleaned-up checkbox version before generating the project overview.
 - [x] 3. **Resume download** - downloadable PDF link
 - [x] 8. **SEO & real bio content** - real About-section bio (from resume), meta tags, Open Graph, JSON-LD Person structured data, sitemap.xml, robots.txt
 - [x] 4. **Contact form** - form UI + Nodemailer/Gmail SMTP backend with honeypot/rate-limiting
-- [ ] 5. **Project data wiring** - Upstash Redis storage, replace placeholder data with real reads for the grid and detail pages
+- [x] 5. **Project data wiring** - Upstash Redis storage, replace placeholder data with real reads for the grid and detail pages
 - [ ] 6. **Admin login** - secret route, bcrypt password check, signed-cookie session
 - [ ] 7. **Admin project management** - create/edit project records (writes to Redis) from the admin UI

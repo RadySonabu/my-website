@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { buildSitemapEntries } from "./lib/seo";
 import { getAllProjects } from "./lib/projects";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return buildSitemapEntries("https://ardyubanos.vercel.app", getAllProjects());
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const projects = await getAllProjects();
+  return buildSitemapEntries("https://ardyubanos.vercel.app", projects);
 }
