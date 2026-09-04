@@ -1,6 +1,6 @@
 # my-website - Project Overview
 
-<!-- blueprint:source-hash 9c148766ad9979236f8ec2f6426b61b15d56d58b9d71eb6fd29b563391e95dce -->
+<!-- blueprint:source-hash 914a7fddba047283e4bb1234714d783090feedb096cd56c87e979c320efb599e -->
 
 > A personal portfolio website for showcasing projects and skills to recruiters,
 > with a private admin area for managing project content without redeploying.
@@ -39,8 +39,9 @@ redeploy for every edit; a private admin area removes that friction.
    with real reads for the grid and detail pages.
 6. **Admin login** - secret, unlinked route; bcrypt-hashed password checked
    server-side; session via signed cookie.
-7. **Admin project management** - create/edit project records (writes to
-   Redis) from the admin UI.
+7. **Admin project management** - create/edit/delete project records (writes
+   to Redis) from the admin UI, split into a dashboard list (7a), create
+   form (7b), edit form (7c), and delete action (7d).
 
 ## Data model
 

@@ -75,4 +75,8 @@ cleaned-up checkbox version before generating the project overview.
 - [x] 4. **Contact form** - form UI + Nodemailer/Gmail SMTP backend with honeypot/rate-limiting
 - [x] 5. **Project data wiring** - Upstash Redis storage, replace placeholder data with real reads for the grid and detail pages
 - [x] 6. **Admin login** - secret route, bcrypt password check, signed-cookie session
-- [ ] 7. **Admin project management** - create/edit project records (writes to Redis) from the admin UI
+- [ ] 7. **Admin project management**
+  - [x] 7a. **Dashboard project list** - replace the placeholder dashboard with a real list read from Redis, each with an Edit link, plus a "New project" link
+  - [ ] 7b. **Create project** - form with an auto-generated (editable) slug, Zod validation, and a Redis write
+  - [ ] 7c. **Edit project** - pre-filled form and a Redis write updating the existing record
+  - [ ] 7d. **Delete project** - remove a project record and its index entry, with a confirmation step

@@ -16,7 +16,7 @@ Create a personal portfolio website to showcase projects and skills, optimized f
 - **Contact** — contact form section (part of the single-page scroll)
 - **Admin page (secret route)**
   - Login: password-based, bcrypt-hashed, compared server-side
-  - Create/edit projects (plain text fields)
+  - Create/edit/delete projects (plain text fields)
   - Not publicly linked; accessed via a direct URL known only to you
 
 ## 4. Data
