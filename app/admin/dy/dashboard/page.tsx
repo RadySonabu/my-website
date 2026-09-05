@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getAllProjects } from "@/app/lib/projects";
 import { requireAdminSession } from "@/app/lib/session";
 import { logout } from "../actions";
+import DeleteProjectButton from "./DeleteProjectButton";
 
 export default async function AdminDashboardPage() {
   const authed = await requireAdminSession();
@@ -48,12 +49,18 @@ export default async function AdminDashboardPage() {
                 </p>
                 <p className="text-sm text-muted">{project.year}</p>
               </div>
-              <Link
-                href={`/admin/dy/projects/${project.slug}/edit`}
-                className="text-sm text-muted hover:text-foreground"
-              >
-                Edit
-              </Link>
+              <div className="flex items-center gap-4">
+                <Link
+                  href={`/admin/dy/projects/${project.slug}/edit`}
+                  className="text-sm text-muted hover:text-foreground"
+                >
+                  Edit
+                </Link>
+                <DeleteProjectButton
+                  slug={project.slug}
+                  title={project.title}
+                />
+              </div>
             </li>
           ))}
         </ul>

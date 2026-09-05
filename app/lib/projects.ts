@@ -80,3 +80,13 @@ export async function updateProject(
 ): Promise<void> {
   await redis.set(projectKey(slug), { ...project, slug });
 }
+
+export async function deleteProject(slug: string): Promise<void> {
+  await redis.del(projectKey(slug));
+
+  const slugs = (await redis.get<string[]>(INDEX_KEY)) ?? [];
+  await redis.set(
+    INDEX_KEY,
+    slugs.filter((existing) => existing !== slug),
+  );
+}
