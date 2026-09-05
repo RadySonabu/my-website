@@ -34,6 +34,13 @@ export const projectFormSchema = z.object({
 
 export type ProjectFormInput = z.infer<typeof projectFormSchema>;
 
+export const editProjectFormSchema = projectFormSchema.omit({
+  slug: true,
+  slugWasManuallyEdited: true,
+});
+
+export type EditProjectFormInput = z.infer<typeof editProjectFormSchema>;
+
 const INDEX_KEY = "project:index";
 
 function projectKey(slug: string): string {
@@ -65,4 +72,11 @@ export async function createProject(project: Project): Promise<void> {
 
   const slugs = (await redis.get<string[]>(INDEX_KEY)) ?? [];
   await redis.set(INDEX_KEY, [...slugs, project.slug]);
+}
+
+export async function updateProject(
+  slug: string,
+  project: Omit<Project, "slug">,
+): Promise<void> {
+  await redis.set(projectKey(slug), { ...project, slug });
 }

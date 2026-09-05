@@ -78,5 +78,5 @@ cleaned-up checkbox version before generating the project overview.
 - [ ] 7. **Admin project management**
   - [x] 7a. **Dashboard project list** - replace the placeholder dashboard with a real list read from Redis, each with an Edit link, plus a "New project" link
   - [x] 7b. **Create project** - form with an auto-generated (editable) slug, Zod validation, and a Redis write
-  - [ ] 7c. **Edit project** - pre-filled form and a Redis write updating the existing record
+  - [x] 7c. **Edit project** - pre-filled form and a Redis write updating the existing record
   - [ ] 7d. **Delete project** - remove a project record and its index entry, with a confirmation step
