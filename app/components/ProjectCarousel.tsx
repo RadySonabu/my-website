@@ -66,15 +66,18 @@ export default function ProjectCarousel({ projects }: { projects: Project[] }) {
   const CARD_HEIGHT = CARD_HEIGHT_BASE * scale;
   const STEP_X = STEP_X_BASE * scale;
 
-  const visibleCount = Math.min(MAX_VISIBLE, total);
-  const leftCount = Math.floor((visibleCount - 1) / 2);
-  const rightCount = visibleCount - 1 - leftCount;
-  const positions = Array.from(
-    { length: visibleCount },
-    (_, i) => i - leftCount
+  // Always symmetric: equal cards stacked behind each side of the center,
+  // even if that means dropping one project rather than showing an
+  // unbalanced 1-left/2-right (or similar) stack.
+  const sideCount = Math.min(
+    Math.floor((MAX_VISIBLE - 1) / 2),
+    Math.floor((total - 1) / 2)
   );
-  const maxSide = Math.max(leftCount, rightCount);
-  const containerWidth = CARD_WIDTH + maxSide * STEP_X * 2 + 24;
+  const positions = Array.from(
+    { length: sideCount * 2 + 1 },
+    (_, i) => i - sideCount
+  );
+  const containerWidth = CARD_WIDTH + sideCount * STEP_X * 2 + 24;
 
   return (
     <div
@@ -181,6 +184,23 @@ export default function ProjectCarousel({ projects }: { projects: Project[] }) {
                 </span>
               </div>
             </div>
+
+            {isCenter && total > 1 && (
+              <div className="absolute inset-x-0 bottom-0 h-[3px] bg-white/10">
+                <div
+                  key={front}
+                  className="h-full"
+                  style={{
+                    backgroundColor: "var(--hero-cream)",
+                    animationName: "carousel-progress",
+                    animationDuration: `${ROTATE_INTERVAL_MS}ms`,
+                    animationTimingFunction: "linear",
+                    animationFillMode: "forwards",
+                    animationPlayState: paused ? "paused" : "running",
+                  }}
+                />
+              </div>
+            )}
           </Link>
         );
       })}
