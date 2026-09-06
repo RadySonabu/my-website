@@ -39,15 +39,20 @@ export async function POST(request: Request) {
     );
   }
 
-  try {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: { user: gmailUser, pass: gmailAppPassword },
-    });
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: { user: gmailUser, pass: gmailAppPassword },
+  });
 
+  // Gmail "+ addressing": mail to user+tag@gmail.com still lands in the same
+  // inbox as user@gmail.com, but can be filtered/labeled on the "+tag" part.
+  const [localPart, domain] = gmailUser.split("@");
+  const notifyAddress = `${localPart}+ubanox@${domain}`;
+
+  try {
     await transporter.sendMail({
-      from: gmailUser,
-      to: gmailUser,
+      from: `"Ubanox" <${gmailUser}>`,
+      to: notifyAddress,
       replyTo: parsed.data.email,
       subject: `New contact form message from ${parsed.data.name}`,
       text: `From: ${parsed.data.name} <${parsed.data.email}>\n\n${parsed.data.message}`,
@@ -57,6 +62,19 @@ export async function POST(request: Request) {
       { error: "Unable to send message right now." },
       { status: 500 },
     );
+  }
+
+  // Best-effort auto-reply to the sender - the notification above already
+  // succeeded, so a failure here shouldn't turn the submission into an error.
+  try {
+    await transporter.sendMail({
+      from: `"Ubanox" <${gmailUser}>`,
+      to: parsed.data.email,
+      subject: "We've received your message - Ubanox",
+      text: `Hi ${parsed.data.name},\n\nThanks for reaching out to Ubanox. We've received your message and will get back to you soon.\n\n— Ubanox`,
+    });
+  } catch {
+    // Notification already sent; nothing else to do if only the auto-reply fails.
   }
 
   return NextResponse.json({ success: true });
