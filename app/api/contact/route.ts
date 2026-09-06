@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { contactFormSchema, isRateLimited } from "@/app/lib/contact";
+import {
+  contactAutoReplyEmail,
+  contactNotificationEmail,
+} from "@/app/lib/emailTemplates";
 
 const RATE_LIMIT = { max: 3, windowMs: 15 * 60 * 1000 };
 const submissionsByIp = new Map<string, number[]>();
@@ -49,13 +53,16 @@ export async function POST(request: Request) {
   const [localPart, domain] = gmailUser.split("@");
   const notifyAddress = `${localPart}+ubanox@${domain}`;
 
+  const notification = contactNotificationEmail(parsed.data);
+
   try {
     await transporter.sendMail({
       from: `"Ubanox" <${gmailUser}>`,
       to: notifyAddress,
       replyTo: parsed.data.email,
-      subject: `New contact form message from ${parsed.data.name}`,
-      text: `From: ${parsed.data.name} <${parsed.data.email}>\n\n${parsed.data.message}`,
+      subject: notification.subject,
+      text: notification.text,
+      html: notification.html,
     });
   } catch {
     return NextResponse.json(
@@ -67,11 +74,13 @@ export async function POST(request: Request) {
   // Best-effort auto-reply to the sender - the notification above already
   // succeeded, so a failure here shouldn't turn the submission into an error.
   try {
+    const autoReply = contactAutoReplyEmail(parsed.data);
     await transporter.sendMail({
       from: `"Ubanox" <${gmailUser}>`,
       to: parsed.data.email,
-      subject: "We've received your message - Ubanox",
-      text: `Hi ${parsed.data.name},\n\nThanks for reaching out to Ubanox. We've received your message and will get back to you soon.\n\n— Ubanox`,
+      subject: autoReply.subject,
+      text: autoReply.text,
+      html: autoReply.html,
     });
   } catch {
     // Notification already sent; nothing else to do if only the auto-reply fails.
