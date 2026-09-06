@@ -1,23 +1,25 @@
 # my-website - Project Overview
 
-<!-- blueprint:source-hash 914a7fddba047283e4bb1234714d783090feedb096cd56c87e979c320efb599e -->
+<!-- blueprint:source-hash 1c951aef7994426be50b5bc6d5699ba83f520ad646688b33b588bdbee6d90f02 -->
 
-> A personal portfolio website for showcasing projects and skills to recruiters,
-> with a private admin area for managing project content without redeploying.
+> A company portfolio website for Ubanox, an AI solutions company, showcasing
+> projects and services to prospective clients, with a private admin area for
+> managing project content without redeploying.
 
 ## Problem
 
-Recruiters and hiring managers need to assess a candidate's capabilities quickly
-and find a way to get in touch. A personal portfolio site solves this by
-presenting projects and skills in a fast-scanning format, with a low-friction
-contact path. Managing project content today would otherwise require a
-redeploy for every edit; a private admin area removes that friction.
+Businesses and individuals evaluating an AI solutions provider need to assess
+capability quickly and find a way to get in touch. A company portfolio site
+solves this by presenting projects and services in a fast-scanning format,
+with a low-friction contact path. Managing project content today would
+otherwise require a redeploy for every edit; a private admin area removes
+that friction.
 
 ## Users
 
-- **Recruiters and hiring managers (public, primary)** - need fast scanning,
-  clear proof of skills, and an easy path to contact.
-- **Site owner (private, secondary)** - accesses a hidden admin login to
+- **Businesses and individuals seeking AI solutions (public, primary)** - need
+  fast scanning, clear proof of capability, and an easy path to contact.
+- **Company admin (private, secondary)** - accesses a hidden admin login to
   create and edit projects without touching code or redeploying.
 
 ## Features
@@ -27,12 +29,14 @@ redeploy for every edit; a private admin area removes that friction.
 2. **Projects grid & detail pages** - card grid embedded in the scroll flow;
    each card links to a dedicated `/projects/[slug]` detail page. Uses
    placeholder data until feature 5 wires up storage.
-3. **Resume download** - downloadable PDF link.
-8. **SEO & real bio content** - real About-section bio drawn from the site
-   owner's resume, plus metadata, Open Graph tags, JSON-LD Person structured
-   data, `sitemap.xml`, and `robots.txt`, so search results surface for name
-   and role searches (e.g. "Ardy Ubanos", "MSCS Professor", "AI Developer",
-   "Python Developer" + Philippines).
+3. **Resume download** *(retired)* - a downloadable PDF link that shipped for
+   the personal-portfolio version of the site. Removed from the hero along
+   with the personal name and LinkedIn link when the site repositioned to a
+   company portfolio; no longer part of the active feature set.
+8. **SEO & real bio content** - real About-section content, plus metadata,
+   Open Graph tags, JSON-LD structured data, `sitemap.xml`, and `robots.txt`,
+   so search results surface for company and service searches (e.g.
+   "Ubanox", "AI solutions company", "AI development" + Philippines).
 4. **Contact form** - form UI plus a Nodemailer/Gmail SMTP backend, with
    honeypot and basic rate-limiting spam protection.
 5. **Project data wiring** - Upstash Redis storage; replaces placeholder data
@@ -61,7 +65,8 @@ MVP fields:
 - `description` (string) - fuller write-up for the detail page (can be
   drafted with Claude Haiku during admin authoring)
 - `techStack` (array of string) - e.g. `["Next.js", "Postgres", "Tailwind"]`
-- `role` (string) - the site owner's role on the project
+- `role` (string) - the company's role on the project (e.g. "Full-stack
+  developer")
 - `year` / `dateCompleted` (string/date) - for sorting and context
 - `thumbnailUrl` (string) - card grid image
 - `liveUrl` (string) - link to a live demo/site, if any
@@ -89,8 +94,14 @@ additional screenshots), `order` (number, manual sort control), `status`
 
 ## Monetization
 
-Not monetizing. Vercel's Hobby tier (free) is non-commercial only, which is
-consistent with this project having no revenue plan.
+The site itself doesn't process payments or subscriptions - it's a
+marketing/portfolio site for a company whose revenue comes from client work
+delivered off-site.
+
+> TODO (open question) - Vercel's Hobby tier is licensed for non-commercial
+> use. Now that Ubanox is an actual company using this site commercially,
+> confirm whether a paid Vercel plan is needed before/at launch rather than
+> assuming Hobby still applies.
 
 ## UI/UX
 
@@ -101,8 +112,8 @@ consistent with this project having no revenue plan.
   the Projects section links out to standalone detail pages
 - **Admin UI** - functional/plain; does not need to match the public site's
   polish
-- **About section** - real bio content (not placeholder), written to
-  naturally surface role/skill keywords for search
+- **About section** - real company content (not placeholder), written to
+  naturally surface company/service keywords for search
 
 Routes:
 
@@ -119,9 +130,11 @@ Routes:
 - **Build** - `next build` (Vercel default detection, no `vercel.json` needed)
 - **Env vars** (names only) - Upstash Redis connection credentials, admin
   password hash, Gmail App Password for Nodemailer SMTP, Claude Haiku API key
-- **Cost** - $0/month (Vercel Hobby + Upstash free tier), aside from minor
-  one-time Claude Haiku API usage during content drafting
+- **Cost** - currently $0/month (Vercel Hobby + Upstash free tier), aside from
+  minor one-time Claude Haiku API usage during content drafting - pending the
+  Hobby-tier commercial-use question above
 
 ## Open questions
 
-None - both plans are complete and consistent as of this generation.
+- Vercel Hobby tier vs. commercial use (see Monetization) - needs a decision
+  before/at launch.

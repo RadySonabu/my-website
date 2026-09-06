@@ -2,7 +2,6 @@ import Link from "next/link";
 import ContactForm from "./components/ContactForm";
 import Logo from "./components/Logo";
 import ProjectCarousel from "./components/ProjectCarousel";
-import ResumeDownloadLink from "./components/ResumeDownloadLink";
 import ScrollReveal from "./components/ScrollReveal";
 import { getAllProjects } from "./lib/projects";
 
@@ -70,44 +69,49 @@ export default async function Home() {
 
           <div className="mx-auto flex w-full max-w-[1400px] flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-center lg:gap-10">
             <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-              <p className="text-sm font-medium uppercase tracking-widest text-muted">
-                Ardy Ubanos
-              </p>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-xs font-medium text-muted">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                </span>
+                Currently available for new projects
+              </span>
+
               <h1
-                className="mt-3 text-5xl font-bold tracking-tight sm:text-7xl"
+                className="mt-4 text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
                 style={{ color: "var(--hero-cream)" }}
               >
-                AI Deve<span className="hero-gradient-letter">l</span>oper
+                AI That Sh<span className="hero-gradient-letter">i</span>ps
               </h1>
-              <p className="mt-4 max-w-md text-lg text-muted">
-                Building intelligent products from idea to deploy.
+              <p className="mt-3 max-w-md text-lg text-muted">
+                We offer AI solutions to your personal and business needs.
               </p>
 
               <div className="mt-4 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
-                <a
-                  href="https://www.linkedin.com/in/ardy-ubanos/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn profile"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1 text-xs text-muted transition-colors hover:border-white/30 hover:text-foreground"
-                >
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    width="14"
-                    height="14"
-                    fill="currentColor"
-                  >
-                    <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.44-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.11 20.45H3.56V9h3.55v11.45z" />
-                  </svg>
-                  LinkedIn
-                </a>
                 <span className="inline-flex items-center rounded-full border border-white/10 px-3 py-1 text-xs text-muted">
-                  Metro Manila, PH &middot; Open to remote
+                  Metro Manila, PH &middot; Serving clients worldwide
                 </span>
               </div>
 
-              <ResumeDownloadLink />
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+                <a
+                  href="#contact"
+                  className="inline-block rounded-full px-5 py-2 text-sm font-semibold text-background transition-opacity hover:opacity-90"
+                  style={{ backgroundColor: "var(--hero-cream)" }}
+                >
+                  Get in Touch
+                </a>
+                <a
+                  href="#projects"
+                  className="inline-block rounded-full border px-5 py-2 text-sm font-medium transition-colors hover:bg-white/5"
+                  style={{
+                    borderColor: "var(--hero-cream)",
+                    color: "var(--hero-cream)",
+                  }}
+                >
+                  View Our Work
+                </a>
+              </div>
             </div>
 
             {projects.length > 0 && (
@@ -165,21 +169,67 @@ export default async function Home() {
 
         <section
           id="about"
-          className="flex min-h-screen flex-col items-center justify-center px-6 text-center sm:px-10 lg:px-16"
+          className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center sm:px-10 lg:px-16"
         >
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -left-32 top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full opacity-30 blur-3xl"
+            style={{
+              background:
+                "radial-gradient(circle, var(--hero-gradient-start) 0%, transparent 70%)",
+            }}
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-32 top-1/3 h-[360px] w-[360px] rounded-full opacity-20 blur-3xl"
+            style={{
+              background:
+                "radial-gradient(circle, var(--hero-cream) 0%, transparent 70%)",
+            }}
+          />
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 200 200"
+            className="pointer-events-none absolute right-8 top-16 h-32 w-32 opacity-30 sm:h-40 sm:w-40"
+          >
+            <circle
+              cx="100"
+              cy="100"
+              r="70"
+              fill="none"
+              stroke="var(--hero-cream)"
+              strokeWidth="1"
+              strokeDasharray="4 6"
+            />
+            <circle
+              cx="100"
+              cy="100"
+              r="45"
+              fill="none"
+              stroke="var(--hero-gradient-start)"
+              strokeWidth="1"
+            />
+            <circle cx="100" cy="30" r="3" fill="var(--hero-cream)" />
+          </svg>
+
           <ScrollReveal>
             <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
               About
             </h2>
-            <p className="mt-4 max-w-xl text-lg text-muted">
-              I&apos;m a Senior Software Engineer based in Metro Manila,
-              Philippines, focused on Python backend systems and applying
-              LLMs and AI to real products. Alongside engineering work, I
-              teach as a part-time Faculty Lecturer covering Software
-              Analysis and Design. I hold an MS in Computer Science
-              (Graduate), with research in AI-driven recommender systems.
+            <p className="mx-auto mt-4 max-w-xl text-lg text-muted">
+              At Ubanox, we solve problems other teams get stuck on.
+              We&apos;re an AI solutions company based in Metro Manila,
+              Philippines, built around one idea: the best fix isn&apos;t
+              always the obvious one, so we look sideways before we look
+              harder.
             </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+            <p className="mx-auto mt-4 max-w-xl text-lg text-muted">
+              We work across Python backend systems, LLM integration, and
+              full-stack delivery — turning ambiguous problems into shipped,
+              working products. If the standard approach doesn&apos;t fit
+              your problem, we&apos;ll find the one that does.
+            </p>
+            <div className="relative mt-6 flex flex-wrap items-center justify-center gap-2">
               <img
                 src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"
                 alt="Python"
@@ -235,52 +285,77 @@ export default async function Home() {
         </section>
 
         <section
-          id="experience"
-          aria-label="Experience"
-          className="mx-auto max-w-2xl px-6 py-24 sm:px-10 lg:px-16"
-        >
-          <ScrollReveal>
-            <h2 className="text-center text-3xl font-semibold tracking-tight sm:text-4xl">
-              Experience
-            </h2>
-            <ul className="mt-10 flex flex-col gap-6">
-              <li className="rounded-lg border border-white/10 p-5">
-                <h3 className="text-lg font-semibold tracking-tight">
-                  Senior Software Engineer
-                </h3>
-                <p className="mt-1 text-sm text-muted">
-                  Python APIs, LLM-powered features, backend infrastructure.
-                </p>
-              </li>
-              <li className="rounded-lg border border-white/10 p-5">
-                <h3 className="text-lg font-semibold tracking-tight">
-                  Faculty Lecturer
-                </h3>
-                <p className="mt-1 text-sm text-muted">
-                  Software Analysis &amp; Design, curriculum and mentorship.
-                </p>
-              </li>
-              <li className="rounded-lg border border-white/10 p-5">
-                <h3 className="text-lg font-semibold tracking-tight">
-                  Full-Stack Developer
-                </h3>
-                <p className="mt-1 text-sm text-muted">
-                  Django/DRF APIs, cloud deployment, sprint leadership.
-                </p>
-              </li>
-            </ul>
-          </ScrollReveal>
-        </section>
-
-        <section
           id="contact"
-          className="flex min-h-screen flex-col items-center justify-center px-6 text-center sm:px-10 lg:px-16"
+          className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-24 sm:px-10 lg:px-16"
         >
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -left-40 top-1/4 h-[420px] w-[420px] rounded-full opacity-25 blur-3xl"
+            style={{
+              background:
+                "radial-gradient(circle, var(--hero-gradient-start) 0%, transparent 70%)",
+            }}
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-24 bottom-0 h-[320px] w-[320px] rounded-full opacity-20 blur-3xl"
+            style={{
+              background:
+                "radial-gradient(circle, var(--hero-cream) 0%, transparent 70%)",
+            }}
+          />
+
           <ScrollReveal>
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              Contact
-            </h2>
-            <ContactForm />
+            <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-12 lg:flex-row lg:items-center lg:gap-16">
+              <div className="flex flex-col items-center text-center lg:w-1/2 lg:items-start lg:text-left">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 160 160"
+                  className="h-28 w-28 opacity-80 sm:h-36 sm:w-36"
+                >
+                  <circle
+                    cx="80"
+                    cy="80"
+                    r="60"
+                    fill="none"
+                    stroke="var(--hero-cream)"
+                    strokeWidth="1"
+                    strokeDasharray="3 7"
+                  />
+                  <circle
+                    cx="80"
+                    cy="80"
+                    r="38"
+                    fill="none"
+                    stroke="var(--hero-gradient-start)"
+                    strokeWidth="1"
+                  />
+                  <circle cx="80" cy="20" r="3" fill="var(--hero-cream)" />
+                  <circle cx="128" cy="104" r="2" fill="var(--hero-gradient-start)" />
+                </svg>
+
+                <h2 className="mt-6 text-3xl font-semibold tracking-tight sm:text-4xl">
+                  Let&apos;s build something
+                </h2>
+                <p className="mt-4 max-w-sm text-lg text-muted">
+                  Have a project in mind, or just want to explore what&apos;s
+                  possible with AI? Tell us about it and we&apos;ll get back
+                  to you.
+                </p>
+                {/* <a
+                  href="mailto:hello@ubanox.com"
+                  className="mt-4 text-sm font-medium text-foreground/80 underline decoration-white/20 underline-offset-4 transition-colors hover:text-foreground"
+                >
+                  hello@gmail.com
+                </a> */}
+              </div>
+
+              <div className="w-full lg:w-1/2">
+                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur sm:p-8">
+                  <ContactForm />
+                </div>
+              </div>
+            </div>
           </ScrollReveal>
         </section>
       </main>

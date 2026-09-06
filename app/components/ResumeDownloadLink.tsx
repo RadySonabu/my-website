@@ -14,10 +14,9 @@ export default function ResumeDownloadLink() {
         setDownloaded(true);
         setTimeout(() => setDownloaded(false), 2000);
       }}
-      className="mt-6 inline-block rounded-full border px-5 py-2 text-sm font-medium transition-colors hover:bg-white/5"
+      className="mt-6 inline-block rounded-full px-5 py-2 text-sm font-semibold text-background transition-opacity hover:opacity-90"
       style={{
-        borderColor: "var(--hero-cream)",
-        color: "var(--hero-cream)",
+        backgroundColor: "var(--hero-cream)",
       }}
     >
       {downloaded ? "Downloaded ✓" : "Download Resume"}
