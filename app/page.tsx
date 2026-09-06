@@ -1,5 +1,7 @@
 import Link from "next/link";
 import ContactForm from "./components/ContactForm";
+import Logo from "./components/Logo";
+import ProjectCarousel from "./components/ProjectCarousel";
 import ResumeDownloadLink from "./components/ResumeDownloadLink";
 import ScrollReveal from "./components/ScrollReveal";
 import { getAllProjects } from "./lib/projects";
@@ -17,23 +19,30 @@ export default async function Home() {
     <>
       <nav
         aria-label="Primary"
-        className="sticky top-0 z-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border-b border-white/10 bg-background/80 px-6 py-4 backdrop-blur"
+        className="sticky top-0 z-10 border-b border-white/10 bg-background/80 px-6 py-4 backdrop-blur sm:px-10 lg:px-16"
       >
-        {NAV_LINKS.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className="text-sm font-medium tracking-wide text-foreground/80 transition-colors hover:text-foreground"
-          >
-            {link.label}
+        <div className="mx-auto flex w-full max-w-4xl flex-wrap items-center justify-between gap-x-6 gap-y-2">
+          <a href="#home" aria-label="Home">
+            <Logo />
           </a>
-        ))}
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium tracking-wide text-foreground/80 transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
       </nav>
 
       <main>
         <section
           id="home"
-          className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center"
+          className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 sm:px-10 lg:px-16"
         >
           <svg
             aria-hidden="true"
@@ -59,51 +68,61 @@ export default async function Home() {
             />
           </svg>
 
-          <p className="text-sm font-medium uppercase tracking-widest text-muted">
-            Ardy Ubanos
-          </p>
-          <h1
-            className="mt-3 text-5xl font-bold tracking-tight sm:text-7xl"
-            style={{ color: "var(--hero-cream)" }}
-          >
-            AI Deve<span className="hero-gradient-letter">l</span>oper
-          </h1>
-          <p className="mt-4 max-w-md text-lg text-muted">
-            Building intelligent products from idea to deploy.
-          </p>
-
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href="https://www.linkedin.com/in/ardy-ubanos/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn profile"
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1 text-xs text-muted transition-colors hover:border-white/30 hover:text-foreground"
-            >
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                width="14"
-                height="14"
-                fill="currentColor"
+          <div className="mx-auto flex w-full max-w-[1400px] flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-center lg:gap-10">
+            <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+              <p className="text-sm font-medium uppercase tracking-widest text-muted">
+                Ardy Ubanos
+              </p>
+              <h1
+                className="mt-3 text-5xl font-bold tracking-tight sm:text-7xl"
+                style={{ color: "var(--hero-cream)" }}
               >
-                <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.44-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.11 20.45H3.56V9h3.55v11.45z" />
-              </svg>
-              LinkedIn
-            </a>
-            <span className="inline-flex items-center rounded-full border border-white/10 px-3 py-1 text-xs text-muted">
-              Metro Manila, PH &middot; Open to remote
-            </span>
-          </div>
+                AI Deve<span className="hero-gradient-letter">l</span>oper
+              </h1>
+              <p className="mt-4 max-w-md text-lg text-muted">
+                Building intelligent products from idea to deploy.
+              </p>
 
-          <ResumeDownloadLink />
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+                <a
+                  href="https://www.linkedin.com/in/ardy-ubanos/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn profile"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1 text-xs text-muted transition-colors hover:border-white/30 hover:text-foreground"
+                >
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    width="14"
+                    height="14"
+                    fill="currentColor"
+                  >
+                    <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.44-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.11 20.45H3.56V9h3.55v11.45z" />
+                  </svg>
+                  LinkedIn
+                </a>
+                <span className="inline-flex items-center rounded-full border border-white/10 px-3 py-1 text-xs text-muted">
+                  Metro Manila, PH &middot; Open to remote
+                </span>
+              </div>
+
+              <ResumeDownloadLink />
+            </div>
+
+            {projects.length > 0 && (
+              <div className="w-full lg:w-auto lg:shrink-0">
+                <ProjectCarousel projects={projects} />
+              </div>
+            )}
+          </div>
         </section>
 
         {projects.length > 0 && (
           <section
             id="projects"
             aria-label="Projects"
-            className="mx-auto max-w-5xl px-6 py-24"
+            className="mx-auto max-w-5xl px-6 py-24 sm:px-10 lg:px-16"
           >
             <ScrollReveal>
               <h2 className="text-center text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -146,7 +165,7 @@ export default async function Home() {
 
         <section
           id="about"
-          className="flex min-h-screen flex-col items-center justify-center px-6 text-center"
+          className="flex min-h-screen flex-col items-center justify-center px-6 text-center sm:px-10 lg:px-16"
         >
           <ScrollReveal>
             <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -218,7 +237,7 @@ export default async function Home() {
         <section
           id="experience"
           aria-label="Experience"
-          className="mx-auto max-w-2xl px-6 py-24"
+          className="mx-auto max-w-2xl px-6 py-24 sm:px-10 lg:px-16"
         >
           <ScrollReveal>
             <h2 className="text-center text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -255,7 +274,7 @@ export default async function Home() {
 
         <section
           id="contact"
-          className="flex min-h-screen flex-col items-center justify-center px-6 text-center"
+          className="flex min-h-screen flex-col items-center justify-center px-6 text-center sm:px-10 lg:px-16"
         >
           <ScrollReveal>
             <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
