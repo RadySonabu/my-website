@@ -17,6 +17,10 @@ function escapeHtml(value: string) {
 function layout(bodyHtml: string) {
   return `<!doctype html>
 <html>
+  <head>
+    <meta name="color-scheme" content="light" />
+    <meta name="supported-color-schemes" content="light" />
+  </head>
   <body style="margin:0;padding:0;background-color:#f4f4f4;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f4;padding:32px 16px;">
       <tr>
