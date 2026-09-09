@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { editProjectFormSchema, updateProject } from "@/app/lib/projects";
+import { requireAdminSession } from "@/app/lib/session";
 
 const GENERIC_ERROR = "Unable to update project. Check the fields.";
 
@@ -10,6 +11,10 @@ export async function updateProjectAction(
   _prevState: { error?: string } | undefined,
   formData: FormData,
 ): Promise<{ error?: string }> {
+  if (!(await requireAdminSession())) {
+    return { error: "Unauthorized" };
+  }
+
   const parsed = editProjectFormSchema.safeParse({
     title: formData.get("title"),
     summary: formData.get("summary"),

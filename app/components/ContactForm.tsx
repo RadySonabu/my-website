@@ -1,11 +1,15 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import Script from "next/script";
+import { useRef, useState, type FormEvent } from "react";
 
 type Status = "idle" | "pending" | "success" | "error";
 
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const renderedAt = useRef(Date.now());
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -23,6 +27,8 @@ export default function ContactForm() {
           email: data.get("email"),
           message: data.get("message"),
           website: data.get("website"),
+          renderedAt: renderedAt.current,
+          turnstileToken: data.get("cf-turnstile-response"),
         }),
       });
 
@@ -87,6 +93,17 @@ export default function ContactForm() {
         <label htmlFor="website">Website</label>
         <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
+
+      {TURNSTILE_SITE_KEY && (
+        <>
+          <Script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+            async
+            defer
+          />
+          <div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} />
+        </>
+      )}
 
       <button
         type="submit"

@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import { contactFormSchema, isRateLimited } from "@/app/lib/contact";
+import { contactFormSchema, isSubmittedTooFast } from "@/app/lib/contact";
+import { isContactRateLimited } from "@/app/lib/rateLimit";
+import { verifyTurnstileToken } from "@/app/lib/turnstile";
 import {
   contactAutoReplyEmail,
   contactNotificationEmail,
 } from "@/app/lib/emailTemplates";
-
-const RATE_LIMIT = { max: 3, windowMs: 15 * 60 * 1000 };
-const submissionsByIp = new Map<string, number[]>();
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -25,11 +24,28 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true });
   }
 
-  const ip = request.headers.get("x-forwarded-for") ?? "unknown";
-  if (isRateLimited(submissionsByIp, ip, Date.now(), RATE_LIMIT)) {
+  if (isSubmittedTooFast(parsed.data.renderedAt, Date.now())) {
+    // Filled and submitted faster than a human could - silently succeed.
+    return NextResponse.json({ success: true });
+  }
+
+  const forwardedFor = request.headers.get("x-forwarded-for");
+
+  if (await isContactRateLimited(forwardedFor)) {
     return NextResponse.json(
       { error: "Too many requests. Please try again later." },
       { status: 429 },
+    );
+  }
+
+  const turnstileOk = await verifyTurnstileToken(
+    parsed.data.turnstileToken,
+    forwardedFor?.split(",")[0].trim(),
+  );
+  if (!turnstileOk) {
+    return NextResponse.json(
+      { error: "Verification failed. Please try again." },
+      { status: 400 },
     );
   }
 

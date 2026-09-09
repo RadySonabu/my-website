@@ -7,6 +7,7 @@ import {
   getAllProjects,
   projectFormSchema,
 } from "@/app/lib/projects";
+import { requireAdminSession } from "@/app/lib/session";
 
 const GENERIC_ERROR = "Unable to create project. Check the fields and slug.";
 
@@ -14,6 +15,10 @@ export async function createProjectAction(
   _prevState: { error?: string } | undefined,
   formData: FormData,
 ): Promise<{ error?: string }> {
+  if (!(await requireAdminSession())) {
+    return { error: "Unauthorized" };
+  }
+
   const parsed = projectFormSchema.safeParse({
     title: formData.get("title"),
     slug: formData.get("slug"),
