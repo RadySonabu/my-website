@@ -3,12 +3,14 @@ import Logo from "./components/Logo";
 import ProjectCarousel from "./components/ProjectCarousel";
 import ProjectsGrid from "./components/ProjectsGrid";
 import ScrollReveal from "./components/ScrollReveal";
+import ServicesSection from "./components/ServicesSection";
 import { getAllProjects } from "./lib/projects";
 
 const NAV_LINKS = [
   { href: "#home", label: "Home" },
   { href: "#projects", label: "Projects" },
   { href: "#about", label: "About" },
+  { href: "#services", label: "Services" },
   { href: "#contact", label: "Contact" },
 ] as const;
 
@@ -253,6 +255,20 @@ export default async function Home() {
                 alt="AI / LLMs"
                 height={20}
               />
+            </div>
+          </ScrollReveal>
+        </section>
+
+        <section
+          id="services"
+          className="mx-auto max-w-5xl px-6 py-24 sm:px-10 lg:px-16"
+        >
+          <ScrollReveal>
+            <h2 className="text-center text-3xl font-semibold tracking-tight sm:text-4xl">
+              Services
+            </h2>
+            <div className="mt-10">
+              <ServicesSection />
             </div>
           </ScrollReveal>
         </section>

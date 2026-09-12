@@ -82,3 +82,4 @@ cleaned-up checkbox version before generating the project overview.
   - [x] 7b. **Create project** - form with an auto-generated (editable) slug, Zod validation, and a Redis write
   - [x] 7c. **Edit project** - pre-filled form and a Redis write updating the existing record
   - [x] 7d. **Delete project** - remove a project record and its index entry, with a confirmation step
+- [x] 9. **Services section** - "Services" section on the single-page scroll site listing what Ubanox offers, using static content (no admin editing, no storage)

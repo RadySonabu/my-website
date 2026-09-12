@@ -1,6 +1,6 @@
 # my-website - Project Overview
 
-<!-- blueprint:source-hash 1c951aef7994426be50b5bc6d5699ba83f520ad646688b33b588bdbee6d90f02 -->
+<!-- blueprint:source-hash 49cb9961ea32f72a2706f6b634e598db18dbd4e4fe843fdcfef217c817bf4ce0 -->
 
 > A company portfolio website for Ubanox, an AI solutions company, showcasing
 > projects and services to prospective clients, with a private admin area for
@@ -46,6 +46,14 @@ that friction.
 7. **Admin project management** - create/edit/delete project records (writes
    to Redis) from the admin UI, split into a dashboard list (7a), create
    form (7b), edit form (7c), and delete action (7d).
+9. **Services section** *(next up)* - a "Services" section in the single-page
+   scroll site listing Ubanox's service lines: custom software/web
+   development (Next.js/React), AI integration & automation (LLM features,
+   chatbots, agents, workflow automation), data & backend systems (APIs,
+   databases, pipelines), consulting/strategy, marketing, UI/UX design, and
+   training/workshops. Engagement model is end-to-end (idea to launch).
+   Static content only - no admin editing, no storage, same tier as the
+   About section.
 
 ## Data model
 
@@ -108,16 +116,18 @@ delivered off-site.
 - **Tone** - dark, moody, high-contrast; minimalist but distinctive
 - **Motion** - subtle fade/slide-in animations on scroll; restrained, not
   flashy
-- **Navigation** - single-page scroll (Home/About/Contact) with anchor links;
-  the Projects section links out to standalone detail pages
+- **Navigation** - single-page scroll (Home/About/Services/Contact) with
+  anchor links; the Projects section links out to standalone detail pages
 - **Admin UI** - functional/plain; does not need to match the public site's
   polish
 - **About section** - real company content (not placeholder), written to
   naturally surface company/service keywords for search
+- **Services section** - static content, same tier as About; no admin
+  editing or storage (feature 9)
 
 Routes:
 
-- `/` - single-page scroll site (Home/About/Contact, Projects grid)
+- `/` - single-page scroll site (Home/About/Services/Contact, Projects grid)
 - `/projects/[slug]` - project detail page
 - admin route - secret, unlinked path; not documented here per the plan's
   intent to keep it undiscoverable

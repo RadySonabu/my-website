@@ -12,6 +12,7 @@ Create a company portfolio website for Ubanox, an AI solutions company, to showc
 - **Projects section** — card grid embedded in the scroll flow; each card links out to a dedicated project detail page (`/projects/[slug]`)
   - Grid must scale gracefully from 1 project up to 20+ (no hardcoded layout assumptions; consider pagination or "load more" if it grows large)
 - **SEO & discoverability** — metadata, structured data, and real company content so search results surface for company and service searches (e.g. "Ubanox", "AI solutions company", "AI development", "Philippines")
+- **Services section** — static content section listing Ubanox's service lines: custom software/web development (Next.js/React), AI integration & automation (LLM features, chatbots, agents, workflow automation), data & backend systems (APIs, databases, pipelines), consulting/strategy, marketing, UI/UX design, and training/workshops. Engagement model is end-to-end (idea to launch). No admin editing, no storage — same tier as the About section.
 - **Contact** — contact form section (part of the single-page scroll)
 - **Admin page (secret route)**
   - Login: password-based, bcrypt-hashed, compared server-side
@@ -61,7 +62,7 @@ The site itself doesn't process payments or subscriptions - it's a marketing/por
 ## 7. UI/UX
 - **Tone**: Dark, moody, high-contrast — minimalist but distinctive
 - **Motion**: Subtle fade/slide-in animations on scroll — restrained, not flashy
-- **Navigation**: Single-page scroll (Home/About/Contact) with anchor links; Projects section links out to standalone detail pages
+- **Navigation**: Single-page scroll (Home/About/Services/Contact) with anchor links; Projects section links out to standalone detail pages
 - **Admin UI**: Functional/plain — no need to match public site polish
 - **About section**: uses real company content (not placeholder), written to naturally surface company/service keywords for search
 
